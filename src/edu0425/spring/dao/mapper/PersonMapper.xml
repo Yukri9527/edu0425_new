@@ -26,8 +26,7 @@
 		<result property="agedCouple" column="agedCouple" />
 		<result property="singleAgedCouple" column="singleAgedCouple" />
 		<result property="marriages" column="marriages" />
-		<result property="divorces" column="divorces" />
-		
+		<result property="divorces" column="divorces" />		
 	</resultMap>
 
 	

@@ -22,8 +22,6 @@ public interface PersonMapper {
 	@RequestMapping("personInfoResult")
 	List<PersonInfo> getPerson(@Param("cursor") Integer cursor, @Param("offset") Integer offset);
 	
-	
-	
-	
+
 	
 }

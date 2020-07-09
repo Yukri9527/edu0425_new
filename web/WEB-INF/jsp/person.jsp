@@ -22,7 +22,7 @@
 		<table class="table table-bordered">
 			<thead>
 				<tr>
-					<th scope="col">#</th>
+					
 					<th scope="col">地区编号</th>
 					<th scope="col">地区名称</th>
 					<th scope="col">罗马音</th>
@@ -47,8 +47,10 @@
 					<th scope="col">结婚总数</th>
 					<th scope="col">离婚总数</th>
 				</tr>
-			</thead>
-			
+			</thead>	
+			<tbody id="person_tbody">
+				<!-- 我们要在这里用jsrender模板啦！ -->
+			</tbody>
 		</table>
 
 		<nav aria-label="...">
@@ -77,10 +79,9 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
 		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
 		crossorigin="anonymous"></script>
-	
 	<script type="text/javascript">
 		window.onload = function() {//页面加载后调用
-			//var totalCountPage = ${rs.pagination.totalCountPage};
+			
 			var pageIndex = ${pageIndex};
 			var pageSize = ${pageSize};
 			

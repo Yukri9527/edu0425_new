@@ -22,7 +22,7 @@ import edu0425.spring.vo.EmpInfo;
 import edu0425.spring.vo.NationInfo;
 import edu0425.spring.vo.PlayerInfo;
 
-@Component // 注入
+@Component // 注锟斤拷
 public class PlayerServiceImpl implements PlayerService {
 
 	@Autowired
@@ -30,7 +30,6 @@ public class PlayerServiceImpl implements PlayerService {
 
 	@Override
 	public Integer getTotalCount() {
-		// TODO 获取所有球员
 		return playerMapper.getTotalCount();
 	}
 
@@ -43,7 +42,7 @@ public class PlayerServiceImpl implements PlayerService {
 		// List<DeptInfo> list=getDeptList(); // all
 		List<PlayerInfo> list = playerMapper.getPlayer(pagination.getCursor(), pagination.getOffset());
 		for (PlayerInfo player : list) {
-			// 循环查询设置俱乐部和国家信息
+			// 循锟斤拷锟斤拷询锟斤拷锟矫撅拷锟街诧拷锟酵癸拷锟斤拷锟斤拷息
 //			player.setClub(playerMapper.getClubById(player.getCid()));
 //			player.setNation(playerMapper.GetNationById(player.getNid()));
 			player.setClub(InitInfo.club.get(player.getCid()));
@@ -57,31 +56,31 @@ public class PlayerServiceImpl implements PlayerService {
 
 	@Override
 	public NationInfo GetNationById(Integer nid) {
-		// TODO 通过国家Id获取信息
+		// TODO 通锟斤拷锟斤拷锟斤拷Id锟斤拷取锟斤拷息
 		return playerMapper.GetNationById(nid);
 	}
 
 	@Override
 	public ClubInfo getClubById(Integer cid) {
-		// TODO 获取俱乐部信息
+		// TODO 锟斤拷取锟斤拷锟街诧拷锟斤拷息
 		return playerMapper.getClubById(cid);
 	}
 
 	@Override
 	public List<NationInfo> getAllNation() {
-		// 获取所有国家信息
+		// 锟斤拷取锟斤拷锟叫癸拷锟斤拷锟斤拷息
 		return playerMapper.getAllNation();
 	}
 
 	@Override
 	public List<ClubInfo> getAllClub() {
-		// TODO 获取所有俱乐部信息
+		// TODO 锟斤拷取锟斤拷锟叫撅拷锟街诧拷锟斤拷息
 		return playerMapper.getAllClub();
 	}
 
 	@Override
 	public PlayerInfo getPlayerById(Integer pid) {
-		// TODO 获取所有俱乐部信息
+		// TODO 锟斤拷取锟斤拷锟叫撅拷锟街诧拷锟斤拷息
 		return playerMapper.getPlayerById(pid);
 	}
 

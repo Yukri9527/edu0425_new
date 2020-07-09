@@ -46,6 +46,8 @@ public class PersonInfo {
 	
 	private Integer marriages;
 	
+	private Integer divorces;
+	
 	public Integer getLid() {
 		return lid;
 	}
@@ -230,6 +232,6 @@ public class PersonInfo {
 		this.divorces = divorces;
 	}
 
-	private Integer divorces;
+
 
 }
