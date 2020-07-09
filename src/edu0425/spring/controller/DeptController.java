@@ -2,7 +2,7 @@ package edu0425.spring.controller;
 
 import java.util.List;
 
-// controller ´úÌæservlet
+// controller ï¿½ï¿½ï¿½ï¿½servlet
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,14 +20,14 @@ public class DeptController {
 	@Autowired
 	private DeptService deptService;
 
-	// À¹½Ø heetp://localhost:8080/edu0425/dept/list
-	@RequestMapping(value = "/list", method = RequestMethod.GET) // GET£ºÃ¶¾ÙÀà
+	// ï¿½ï¿½ï¿½ï¿½ http://localhost:8080/edu0425/dept/list
+	@RequestMapping(value = "/list", method = RequestMethod.GET) // GETï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½
 	public String deptList(ModelMap modelMap, Integer pageIndex, Integer pageSize) {
 
 		modelMap.put("rs", deptService.getDeptPage(pageIndex, pageSize));
-//		modelMap.put("list",deptService.getDeptList()); //	·µ»ØList<DeptInfo>&&·ÖÒ³ÐÅÏ¢
+//		modelMap.put("list",deptService.getDeptList()); //	ï¿½ï¿½ï¿½ï¿½List<DeptInfo>&&ï¿½ï¿½Ò³ï¿½ï¿½Ï¢
 //		modelMap.put("cnt",deptService.getDeptList());
-		// Ìøµ½WEB-INF/jsp/dept.jsp
+		// ï¿½ï¿½ï¿½ï¿½WEB-INF/jsp/dept.jsp
 		return "dept";
 	}
 
