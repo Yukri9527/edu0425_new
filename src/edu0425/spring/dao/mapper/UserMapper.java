@@ -1,4 +1,4 @@
-package edu0425.spring.dao.mapper;
+                        package edu0425.spring.dao.mapper;
 
 import java.util.Set;
 
@@ -16,7 +16,7 @@ public interface UserMapper {
 	@ResultMap("userInfoResult")
 	UserInfo getUserByLoginId(@Param("id") String loginId);
 	
-	//set ¼¯ºÏ²»¿ÉÖØ¸´
+	//set ï¿½ï¿½ï¿½Ï²ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½
 	Set<String> getRoles(@Param("loginId")String loginId);
 	
 	Set<String> getPermissions(@Param("loginId")String loginId);

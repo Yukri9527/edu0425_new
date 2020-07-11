@@ -18,7 +18,9 @@
 <body>
 	<div class="container">
 		<h1>Welcome to Player Page</h1>
-		
+		<a href ="#" class ="btn btn-link disabled">${msg}</a>
+		<a href ="../logout" class="btn btn-link">退出</a>
+		<!-- href='<c:url value = "/logout" />' -->
 		<table class="table table-bordered">
 			<thead>
 				<tr>

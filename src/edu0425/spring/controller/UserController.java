@@ -4,6 +4,9 @@ import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 
+import edu0425.common.util.MD5Util;
 import edu0425.spring.service.UserService;
 import edu0425.spring.vo.LoginInfo;
 import edu0425.spring.vo.UserInfo;
@@ -38,24 +42,63 @@ public class UserController {
 		return "login";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	// @RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(LoginInfo user, HttpSession session, ModelMap modelMap) {
-		// Èç¹û³É¹¦Ìø×ªµ½index
+		// ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½×ªï¿½ï¿½index
 		if (userService.loginValid(user, session)) {
 			return "redirect:player/index?pageIndex=1&pageSize=10";
 		}
-		// Èç¹û³É¹¦ Ìø×ªµ½indexÒ³Ãæ ·ñÔò·µ»ØµÇÂ¼Ò³Ãæ ÏÔÊ¾ÕËºÅÃÜÂë´íÎó
+		// ï¿½å¦åˆ™è¿”å›ç™»å½•é¡µ å¯†ç ç½®ç©º æ˜¾ç¤ºè´¦å·å¯†ç é”™è¯¯
 		user.setPassword(null);
 		modelMap.put("user", user);
-		modelMap.put("msg", "ÕËºÅ»òÃÜÂë´íÎó");
+		modelMap.put("msg", "è´¦å·æˆ–è€…å¯†ç é”™è¯¯");
 		return "login";
 	}
 
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login2(LoginInfo user, HttpSession session, ModelMap modelMap) {
+		//è·å–å½“å‰ç™»å½•ç”¨æˆ·
+		Subject subject = SecurityUtils.getSubject();
+		//å°è£…è¡¨å•ä¸­çš„æäº¤çš„ç”¨æˆ·åå’Œå¯†ç 
+		UsernamePasswordToken token = new UsernamePasswordToken(user.getLoginId(),MD5Util.textToMD5U16(user.getPassword()),user.isRemember());
+		try {
+			//è°ƒç”¨loginæ–¹æ³•ï¼Œä¼ å…¥å°è£…å¥½çš„token()
+			subject.login(token);
+			// ç™»é™†æˆåŠŸ
+			return "redirect:player/index?pageIndex=1&pageSize=10";
+			
+		} catch (Exception e) {
+			// ï¿½å¦åˆ™è¿”å›ç™»å½•é¡µ å¯†ç ç½®ç©º æ˜¾ç¤ºè´¦å·å¯†ç é”™è¯¯
+			user.setPassword(null);
+			modelMap.put("user", user);
+			modelMap.put("msg", "è´¦å·æˆ–è€…å¯†ç é”™è¯¯");
+			return "login";
+			
+		}
+		
+	}
+
 	@RequestMapping(value = "/permission/{loginId}", method = RequestMethod.GET)
-	@ResponseBody
+	@ResponseBody // ä»¥jsonæ•°æ®æ ¼å¼è¿”å›
 	public JSONArray getPermissions(@PathVariable String loginId) {
-		// TODO ¸ù¾İloginID ²éÑ¯Õâ¸öÓÃ»§ËùÓĞÈ¨ÏŞ¹Ø¼ü×Ö ÒÔjsonÊı×éµÄ¸ñÊ½·µ»Ø
+		// æ ¹æ®loninIdæŸ¥è¯¢è¿™ä¸ªç”¨æˆ·çš„æ‰€æœ‰æƒé™å…³é”®å­— ä»¥jsonæ•°æ®æ ¼å¼è¿”å›
 		return userService.getPermissions(loginId);
 	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		Subject subject= SecurityUtils.getSubject();
+		subject.logout();
+		return "redirect:login";
+	}
+	
+	@RequestMapping("/profile/{loginId}")
+	public String userProfile(@PathVariable String loginId, ModelMap modelmap) {
+		UserInfo user =userService.getUserByLoginId(loginId);
+		modelmap.put("user", user);
+		return "user_profile";
+	}
+	
+	
 
 }
